@@ -57,10 +57,5 @@ public class Student {
         course.removeStudent(this);
     }
 
-    public void printCourse(){
-        for (Course enrolledCourse : enrolledCourses) {
-            System.out.println(enrolledCourse.getTitle());
-        }
 
-    }
 }

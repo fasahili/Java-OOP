@@ -77,6 +77,23 @@ public class University {
         return null;
     }
 
+    public void printCourses(int id){
+        Student student = getStudentById(id);
+        List<Course> listOfCourse = student.getEnrolledCourses();
+      if(listOfCourse.size() > 0){
+          System.out.print("Courses Enrolled by " + student.getName()+" : ");
+          for (Course course : listOfCourse) {
+              System.out.print(" " + course.getTitle());
+          }
+      }
+      else{
+          System.out.print("No courses added for "+student.getName());
+      }
+      System.out.println();
+
+
+
+    }
 
 }
 
