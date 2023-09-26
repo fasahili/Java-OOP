@@ -1,13 +1,18 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Student {
 
-    public Student(int id, String name, String email, List<Course> enrolledCourses) {
+    private int id;
+    private String name;
+    private String email;
+    private List<Course> enrolledCourses;
+
+    public Student(int id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.enrolledCourses = enrolledCourses;
-        //this.enrolledCourses = new ArrayList<>();
+        this.enrolledCourses = new ArrayList<>();
     }
 
     public int getId() {
@@ -34,12 +39,28 @@ public class Student {
         this.email = email;
     }
 
+    public List<Course> getEnrolledCourses() {
+        return enrolledCourses;
+    }
 
-    private int id;
-    private String name;
-    private String email;
+    public void setEnrolledCourses(List<Course> enrolledCourses) {
+        this.enrolledCourses = enrolledCourses;
+    }
 
-    private List<Course> enrolledCourses;
+    public void enrolledAtCourse(Course course){
+        enrolledCourses.add(course);
+        course.addStudent(this);
+    }
 
+    public void dropCourse(Course course){
+        enrolledCourses.remove(course);
+        course.removeStudent(this);
+    }
 
+    public void printCourse(){
+        for (Course enrolledCourse : enrolledCourses) {
+            System.out.println(enrolledCourse.getTitle());
+        }
+
+    }
 }
