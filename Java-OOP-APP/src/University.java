@@ -1,16 +1,6 @@
-import java.util.ArrayList;
 import java.util.List;
 
-public class University {
-    public University() {
-        this.courses = new ArrayList<>();
-        this.students = new ArrayList<>();
-    }
-
-    private final List<Course> courses;
-    private final List<Student> students;
-
-
+public class University extends Report {
     public void addStudent(int id,String name,String email){
         Student student = new Student(id,name,email);
         students.add(student);
@@ -19,81 +9,47 @@ public class University {
         Course course = new Course(code,title,instructor,maxCapacity);
         courses.add(course);
     }
-
-    public void enrollStuInCourse(int id,int code)
-    {
-        Student student = getStudentById(id);
-        Course  course  = getCourseByCode(code);
+    public void enrollStuInCourse(int id,int code) {
         if(validateStu(id, code) ){
-            if(checkCapacityCourse(id, code)) {
-                student.enrolledAtCourse(course);
-            }
+            validateCheckCapacityCourse(id, code);
+        }else{
+            System.out.println("Invalid input");
         }
     }
-
+    private void validateCheckCapacityCourse(int id,int code) {
+        Student student = getStudentById(id);
+        Course  course  = getCourseByCode(code);
+        if(checkCapacityCourse(id, code)) {
+            student.enrolledAtCourse(course);
+        }else{
+            System.out.println("Sorry can't enrolled ("+student.getName()+") Because the Course is Full ...");
+        }
+    }
     private boolean checkCapacityCourse(int id,int code) {
         Student student = getStudentById(id);
         Course  course  = getCourseByCode(code);
-
-       return(course.getEnrolledStudents().size() < course.getMaxCapacity()) ;
-
+        List<Student> listTemp = course.getEnrolledStudents();
+        return course.getMaxCapacity() > listTemp.size();
     }
-
-    private boolean validateStu(int id,int code) {
-        Student student = getStudentById(id);
-        Course course = getCourseByCode(code);
-
-        return student != null && course != null;
-    }
-
     public void  dropStuFromCourse(int id,int code){
         Student student = getStudentById(id);
         Course course = getCourseByCode(code);
 
         if ( validateStu(id,code) ){
             student.dropCourse(course);
+        }else {
+            System.out.println("Invalid input");
         }
 
     }
-    public void  generateReports(){
-
-    }
-
-    public Student getStudentById(int studentId){
-        for (Student student:students){
-            if(student.getId()==studentId){
-                return student;
-            }
-        }
-        return null;
-    }
-
-    public Course getCourseByCode(int courseCode){
-        for (Course course:courses){
-            if (course.getCode()==courseCode){
-                return course;
-            }
-        }
-        return null;
-    }
-
-    public void printCourses(int id){
+    private boolean validateStu(int id,int code) {
         Student student = getStudentById(id);
-        List<Course> listOfCourse = student.getEnrolledCourses();
-      if(listOfCourse.size() > 0){
-          System.out.print("Courses Enrolled by " + student.getName()+" : ");
-          for (Course course : listOfCourse) {
-              System.out.print(" " + course.getTitle());
-          }
-      }
-      else{
-          System.out.print("No courses added for "+student.getName());
-      }
-      System.out.println();
-
-
-
+        Course course = getCourseByCode(code);
+        return student != null && course != null;
     }
+
+
+
 
 }
 
