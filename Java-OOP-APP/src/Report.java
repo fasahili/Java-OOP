@@ -41,7 +41,6 @@ public class Report {
             System.out.println("Student not found");
         }
     }
-
     private void printStudentOfCourse(int code){
     Course course = getCourseByCode(code);
     List<Student> studentList = course.getEnrolledStudents();
@@ -68,6 +67,8 @@ public class Report {
         }
     }
     public void generalReport(int id,int code){
+        System.out.println("General Report .....");
+        System.out.println();
         reportOfCoursesAvailable();
         reportOfStudent(id);
         reportOfCourses(code);
