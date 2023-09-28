@@ -101,5 +101,6 @@ myUniversity.generalReport(121100, 1212323);
 
 ## Contributors
 
+- [Mustafa Assaf](https://github.com/mkassaf)
 - [Faris Al-Sahili](https://github.com/fasahili)
   
