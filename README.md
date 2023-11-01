@@ -1,8 +1,4 @@
 
-Certainly! Below is a README file for your Java code:
-
----
-
 # University Enrollment System
 
 ## Overview
